@@ -14,10 +14,35 @@ db.init_app(app)  # Link the database and the app. This is the reason you need t
 data_manager = DataManager()  # Create an object of the DataManager class
 
 
+#Shows list of Users and a form for adding new users
+@app.route('/', methods=['GET', 'POST'])
+def list_users():
+    users = data_manager.get_users()
+    return str(users)
 
-@app.route('/')
-def home():
-    return "Welcome to Movie App!"
+
+#Adds a new User to the database
+@app.route('/users', methods = ['POST'])
+def create_user():
+    pass
+
+
+#Retrieves user's favorite movie list it it is a GET request
+#Add a new movie to a user's list of favorite movies if it is a POST request
+@app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
+def user_favorite_movies(user_id):
+    pass
+
+
+#Modifies the title of a specific movie from a user's favorite movie list
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/update', methods=['POST'])
+def update_movie():
+    pass
+
+#Removes a specific movie from a user's favorite movie list
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
+def delete_movie(user_id):
+    pass
 
 
 
