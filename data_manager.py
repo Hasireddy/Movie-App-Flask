@@ -3,8 +3,8 @@ from models import db, User, Movie
 #The DataManager class will use SQLAlchemy to interact with SQLite database.It performs all CRUD operations
 
 class DataManager():
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
+       return None
 
     def create_user(self, name):
         new_user = User(name=name)

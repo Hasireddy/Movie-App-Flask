@@ -14,5 +14,14 @@ db.init_app(app)  # Link the database and the app. This is the reason you need t
 data_manager = DataManager()  # Create an object of the DataManager class
 
 
+
+@app.route('/')
+def home():
+    return "Welcome to Movie App!"
+
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    with app.app_context():
+        db.create_all()
+    app.run()
