@@ -5,7 +5,7 @@ db = SQLAlchemy()
 #User model
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
 
 
@@ -13,7 +13,7 @@ class User(db.Model):
 #Movie model
 
 class Movie(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
     director = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Integer, nullable=False)

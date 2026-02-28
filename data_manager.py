@@ -6,7 +6,7 @@ class DataManager():
     def __init__(self):
        return None
 
-    def create_user(self, name):
+    def add_user(self, name):
         new_user = User(name=name)
         db.session.add(new_user)
         db.session.commit()

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 from data_manager import DataManager
 from models import db,Movie
@@ -11,20 +11,26 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)  # Link the database and the app. This is the reason you need to import db from models
 
+with app.app_context():
+    db.create_all()
+
 data_manager = DataManager()  # Create an object of the DataManager class
 
 
 #Shows list of Users and a form for adding new users
 @app.route('/', methods=['GET', 'POST'])
-def list_users():
+def index():
     users = data_manager.get_users()
-    return str(users)
+    return render_template('index.html', users=users)
 
 
 #Adds a new User to the database
 @app.route('/users', methods = ['POST'])
 def create_user():
-    pass
+    name = request.form.get('name')
+    if name:
+        data_manager.add_user(name)
+    return redirect(url_for('index'))
 
 
 #Retrieves user's favorite movie list it it is a GET request
@@ -47,6 +53,6 @@ def delete_movie(user_id):
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run()
+    app.run(host="0.0.0.0", port=5002)
+
+
